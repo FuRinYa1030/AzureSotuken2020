@@ -1,0 +1,9 @@
+[
+  {
+    "toggle": "JS",
+    "filename": "jquery.min.js",
+    "pathname": "/jquery.lib",
+    "target": "JavaScript/jquery.min.js",
+    "content": "text/javascript"
+  }
+]

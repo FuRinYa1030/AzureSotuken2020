@@ -1,0 +1,70 @@
+{
+    "HTML": [
+        {
+            "pathname": "/cosmosdbHTML1.html",
+            "target": "HTML/cosmosdbHTML1.html",
+            "content": "text/html"
+        },
+        {
+            "pathname": "/cosmosdbHTML2.html",
+            "target": "HTML/cosmosdbHTML2.html",
+            "content": "text/html"
+        },
+        {
+            "pathname": "/cosmosdbHTML3.html",
+            "target": "HTML/cosmosdbHTML3.html",
+            "content": "text/html"
+        },
+        {
+            "pathname": "/index_http.html",
+            "target": "HTML/index_http.html",
+            "content": "text/html"
+        },
+        {
+            "pathname": "/next_http.html",
+            "target": "HTML/next_http.html",
+            "content": "text/html"
+        }
+    ],
+    "CSS": [
+        {
+            "pathname": "/do.css",
+            "target": "CSS/do.css",
+            "content": "text/css"
+        }
+    ],
+    "JS": [
+        {
+            "pathname": "/alert.js",
+            "target": "JavaScript/alert.js",
+            "content": "text/javascript"
+        },
+        {
+            "pathname": "/cosmosdb.js",
+            "target": "JavaScript/cosmosdb.js",
+            "content": "text/javascript"
+        },
+        {
+            "pathname": "/cosmosdbHTMLControl1.js",
+            "target": "JavaScript/cosmosdbHTMLControl1.js",
+            "content": "text/javascript"
+        },
+        {
+            "pathname": "/cosmosdbHTMLControl2.js",
+            "target": "JavaScript/cosmosdbHTMLControl2.js",
+            "content": "text/javascript"
+        },
+        {
+            "pathname": "/cosmosdbHTMLControl3.js",
+            "target": "JavaScript/cosmosdbHTMLControl3.js",
+            "content": "text/javascript"
+        }
+    ],
+    "LIB": [
+        {
+            "pathname": "/jquery.lib",
+            "target": "JavaScript/jquery.min.js",
+            "content": "text/javascript"
+        }
+    ]
+}

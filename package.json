@@ -1,0 +1,16 @@
+{
+  "name": "scc2",
+  "version": "1.0.0",
+  "description": "SUSHI PassPort WEB Application",
+  "main": "server.js",
+  "private": true,
+  "license": "MIT",
+  "author": "DreameWhale",
+  "dependencies": {
+    "@azure/cosmos": "^3.7.4",
+    "jquery": "^3.5.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
