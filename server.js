@@ -94,6 +94,11 @@ const server = http.createServer(async(request, response) => {
                 await response.end();
               }
 
+              else if(Res[1] === 'test'){
+                await response.writeHead(200, {'Content-Type': 'text/plain'});
+                await response.end('post test successfull');
+              }
+
               else console.log(magenta + 'No data processing\n' + reset);
             });
           }
