@@ -1,4 +1,5 @@
 const http = require('http');
+const mime = require('mime-types');
 var url1 = require('url');
 var fs = require('fs');
 
@@ -95,8 +96,9 @@ const server = http.createServer(async(request, response) => {
               }
 
               else if(Res[1] === 'test'){
+
                 await response.writeHead(200, {'Content-Type': 'text/plain'});
-                await response.end('post test successfull');
+                await response.end(mime.lookup(Res[1]));
               }
 
               else console.log(magenta + 'No data processing\n' + reset);
