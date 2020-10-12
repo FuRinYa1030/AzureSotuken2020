@@ -74,7 +74,7 @@ const server = http.createServer(async(request, response) => {
 
               console.log(typeof(postData));
 
-              
+
               Res = await postData.split(/[&=]/);
               console.log(yellow + '----------------------------------------' + reset);
               console.log(magenta + "Processing is the "+ Res[1] + reset);
@@ -97,6 +97,11 @@ const server = http.createServer(async(request, response) => {
                 await console.log(magenta + 'post-ADDe\n' + reset);
                 await CMDB.ADDe(Res);
                 await response.end();
+              }
+
+              else if(Res[1] === 'test'){
+                await response.writeHead(200, {'Content-Type': 'text/plain'});
+                await response.end('404 Not Found');
               }
 
               else console.log(magenta + 'No data processing\n' + reset);
