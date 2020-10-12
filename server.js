@@ -98,7 +98,7 @@ const server = http.createServer(async(request, response) => {
               else if(Res[1] === 'test'){
 
                 await response.writeHead(200, {'Content-Type': 'text/plain'});
-                await response.end("tests");
+                await response.end(mime.lookup('test'));
               }
 
               else console.log(magenta + 'No data processing\n' + reset);
