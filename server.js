@@ -71,6 +71,10 @@ const server = http.createServer(async(request, response) => {
           if(request.method === 'POST') {
             await request.on('data', async function(chunk) {postData += chunk;})
             .on('end', async function() {
+
+              console.log(typeof(postData));
+
+              
               Res = await postData.split(/[&=]/);
               console.log(yellow + '----------------------------------------' + reset);
               console.log(magenta + "Processing is the "+ Res[1] + reset);
@@ -93,12 +97,6 @@ const server = http.createServer(async(request, response) => {
                 await console.log(magenta + 'post-ADDe\n' + reset);
                 await CMDB.ADDe(Res);
                 await response.end();
-              }
-
-              else if(Res[1] === 'test'){
-
-                await response.writeHead(200, {'Content-Type': 'text/plain'});
-                await response.end(mime.lookup('test'));
               }
 
               else console.log(magenta + 'No data processing\n' + reset);
