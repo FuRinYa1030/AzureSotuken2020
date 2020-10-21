@@ -17,7 +17,7 @@ var cyan    = '\u001b[36m';
 var white   = '\u001b[37m';
 var reset   = '\u001b[0m';
 
-
+var toString = Object.prototype.toString;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -48,8 +48,7 @@ const server = http.createServer(async(request, response) => {
 
     if(StaticFile_toggle === false){
       console.log(red + "Server couldn't return response to need request by user :@if_under" + reset);
-      await response.writeHead(404, {'Content-Type': 'text/plain'});
-      await response.end('404 Not Found');
+      Error(response,'');
       return;
     }
 
@@ -68,52 +67,73 @@ const server = http.createServer(async(request, response) => {
       //-------post_communication---------------------------------------------------------------------------------------------------------------------
       case '/post':
         try{
+          console.log(postData);
           if(request.method === 'POST') {
-            await request.on('data', async function(chunk) {postData += chunk;})
-            .on('end', async function() {
-
-              console.log(typeof(postData));
-
-
+            await request.on('data', async function(chunk) {
+              //console.log(toString.call(chunk).slice(8, -1).toLowerCase());
+              //postData += await chunk.toString('utf-8', 0, chunk.length);
+              postData += chunk;
+            }).on('end', async function() {
               Res = await postData.split(/[&=]/);
-              console.log(yellow + '----------------------------------------' + reset);
-              console.log(magenta + "Processing is the "+ Res[1] + reset);
+              if(request.headers['content-type'] === 'text/plain; charset=utf-8'){
+                await console.log(yellow + '----------------------------------------' + reset);
+                await console.log(magenta + "Processing is the "+ "image" + reset);
 
-              if(Res[1] === 'Download'){
-                await console.log(magenta + 'post-ADDo\n' + reset);
-                var JsonData = await CMDB.ADDo();
+                Res[3] = Res[3].replace(/%2F/g,"/")
+                Res[3] = Res[3].replace(/%2B/g,"+")
+                Res[3] = Res[3].replace(/%3D/g,"=")
+
+                var decode = new Buffer.from(Res[3],'base64');
+                await fs.writeFileSync('test.png',decode,'base64');
+
+                var JsonData2 = {
+                  "id": "1",
+                  "id_s": 1,
+                  "firstname": "sakaguchi",
+                  "lastname": "fumiya",
+                  "mailaddress": "sf238238%40gmail.com",
+                  "passward": "Asfx01ares"
+                }
 
                 await response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-                await response.end(await JSON.stringify(JsonData, null, '    '));
+                await response.end(await JSON.stringify(JsonData2, null, '    '));
               }
 
-              else if(Res[1] === 'Upload'){
-                await console.log(magenta +'post-ADU\n' + reset);
-                await CMDB.ADU(Res);
-                await response.end();
+              else if(request.headers['content-type'] === 'application/x-www-form-urlencoded; charset=UTF-8'){
+                await console.log(yellow + '----------------------------------------' + reset);
+                await console.log(magenta + "Processing is the "+ Res[1] + reset);
+
+                if(Res[1] === 'Download'){
+                  await console.log(magenta + 'post-ADDo\n' + reset);
+                  var JsonData = await CMDB.ADDo();
+
+                  await response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+                  await response.end(await JSON.stringify(JsonData, null, '    '));
+                }
+
+                else if(Res[1] === 'Upload'){
+                  await console.log(magenta +'post-ADU\n' + reset);
+                  await CMDB.ADU(Res);
+                  await response.end();
+                }
+
+                else if(Res[1] === 'Delete'){
+                  await console.log(magenta + 'post-ADDe\n' + reset);
+                  await CMDB.ADDe(Res);
+                  await response.end();
+                }
+
+                else {Error(response,'database');return;}
               }
 
-              else if(Res[1] === 'Delete'){
-                await console.log(magenta + 'post-ADDe\n' + reset);
-                await CMDB.ADDe(Res);
-                await response.end();
-              }
-
-              else if(Res[1] === 'test'){
-                await response.writeHead(200, {'Content-Type': 'text/plain'});
-                await response.end('404 Not Found');
-              }
-
-              else console.log(magenta + 'No data processing\n' + reset);
+              else{Error(response,'post');return;}
             });
           }
         }catch (err){await console.log(red + err.message + " @POST signal" + reset + "\n");}
         return;
 
       default:
-        console.log(red + "Server couldn't return response to need request by user :@switch_defalut" + reset);
-        await response.writeHead(404, {'Content-Type': 'text/plain'});
-        await response.end('404 Not Found');
+        Error(response,'default');
         return;
     }
   }
@@ -139,7 +159,18 @@ const server = http.createServer(async(request, response) => {
 });
 
 
-
+async function Error(response, plase){
+  if(plase != ''){
+    console.log(red + "Server couldn't return response to need request by user :@switch_" + plase + reset);
+    await response.writeHead(404, {'Content-Type': 'text/plain'});
+    await response.end('404 Not Found');
+  }
+  else {
+    await response.writeHead(404, {'Content-Type': 'text/plain'});
+    await response.end('404 Not Found');
+  }
+  return;
+}
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
