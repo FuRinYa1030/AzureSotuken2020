@@ -1,4 +1,9 @@
 var fs = require('fs');
+var request = require('request');
+
+const predictionKey = "6f41c1b5f9c440d7a7b941b4fb796295";
+const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/557f5036-476c-4f44-9ccf-60b7312635eb/classify/iterations/Iteration1/image"
+
 
 var black   = '\u001b[30m';
 var red     = '\u001b[31m';
@@ -10,6 +15,8 @@ var cyan    = '\u001b[36m';
 var white   = '\u001b[37m';
 var reset   = '\u001b[0m';
 
+var JsonData2
+var JsonData3 = { dog: 0.9997652, cat: 0.0002438426 }
 
 exports.Analysis = async function(Res){
   await console.log(magenta + 'CVS-Analysis start' + reset);
@@ -19,21 +26,38 @@ exports.Analysis = async function(Res){
   Res[3] = await Res[3].replace(/%3D/g,"=");
 
   try {
-    var decode = new Buffer.from(Res[3],'base64');
-    await fs.writeFileSync('test.png',decode,'base64');
+
+    //await fs.writeFileSync('test.png',decode);
   } catch (err) {await console.logred + (err.message + "@CVS-Analysis-save\n" + reset);return err;}
 
-  var JsonData2 = {
-    "id": "1",
-    "id_s": 1,
-    "firstname": "sakaguchi",
-    "lastname": "fumiya",
-    "mailaddress": "sf238238%40gmail.com",
-    "passward": "Asfx01ares"
-  }
+  var decode = await Buffer.from(Res[3],'base64');
 
+  var options = {
+    uri: endPoint,
+    headers: {
+      "Content-Type": "application/octet-stream",
+      "Prediction-Key": predictionKey
+    },
+    body: decode
+  };
+
+  await request.post(options, async function(error, response, body){
+    JsonData2 = await JSON.parse(body);
+
+    JsonData3 = {
+      "dog": JsonData2.predictions[0].probability,
+      "cat": JsonData2.predictions[1].probability
+    }
+
+    await console.log(JsonData3);
+  });
+
+
+  try {
+
+  } catch (err) {await console.logred + (err.message + "@CVS-Analysis-access\n" + reset);return err;}
 
 
   await console.log(magenta + 'CVS-Analysis finish\n' + reset);
-  return JsonData2;
+  return await JsonData3;
 }

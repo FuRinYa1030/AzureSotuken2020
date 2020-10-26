@@ -12,7 +12,8 @@
     "@azure/cosmos": "^3.7.4",
     "file-type": "^15.0.1",
     "jquery": "^3.5.1",
-    "mime-types": "^2.1.27"
+    "mime-types": "^2.1.27",
+    "request": "^2.88.2"
   },
   "scripts": {
     "start": "node server.js"
