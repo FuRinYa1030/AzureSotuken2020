@@ -4,6 +4,7 @@ var url1 = require('url');
 var fs = require('fs');
 
 var CMDB = require('./JavaScript/cosmosdb.js');
+var CVS = require('./JavaScript/CustomVision.js');
 
 var Res;
 
@@ -77,26 +78,12 @@ const server = http.createServer(async(request, response) => {
               Res = await postData.split(/[&=]/);
               if(request.headers['content-type'] === 'text/plain; charset=utf-8'){
                 await console.log(yellow + '----------------------------------------' + reset);
-                await console.log(magenta + "Processing is the "+ "image" + reset);
+                await console.log(magenta + "Processing is the "+ "CVS" + reset);
 
-                Res[3] = Res[3].replace(/%2F/g,"/")
-                Res[3] = Res[3].replace(/%2B/g,"+")
-                Res[3] = Res[3].replace(/%3D/g,"=")
-
-                var decode = new Buffer.from(Res[3],'base64');
-                await fs.writeFileSync('test.png',decode,'base64');
-
-                var JsonData2 = {
-                  "id": "1",
-                  "id_s": 1,
-                  "firstname": "sakaguchi",
-                  "lastname": "fumiya",
-                  "mailaddress": "sf238238%40gmail.com",
-                  "passward": "Asfx01ares"
-                }
+                var Result = await CVS.Analysis(Res);
 
                 await response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-                await response.end(await JSON.stringify(JsonData2, null, '    '));
+                await response.end(await JSON.stringify(Result, null, '    '));
               }
 
               else if(request.headers['content-type'] === 'application/x-www-form-urlencoded; charset=UTF-8'){
