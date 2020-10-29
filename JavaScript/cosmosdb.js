@@ -72,8 +72,8 @@ exports.ADU = async function(Res){
     try {
       for (const itemDef of itemDefList) {j++}
       idSt = String(j + 1);
-
-      if(Number(itemDefList[0].id) == 1 && Number(itemDefList[j - 1].id) != j){
+      if(j == 0){idSt = String(1);}
+      else if(Number(itemDefList[0].id) == 1 && Number(itemDefList[j - 1].id) != j){
         for (const itemDef of itemDefList) {
           if(Number(itemDefList[i].id) + 1 == Number(itemDefList[i + 1].id)){i++;}
           else {idSt = String(i + 2);break;}
@@ -109,15 +109,15 @@ exports.ADU = async function(Res){
 
 
 
-exports.ADDe = async function(Res){
-  await console.log(magenta + 'ADDe star' + reset);
+exports.ADDe = async function(Res,Adj){
+  await console.log(magenta + 'ADDe start' + reset);
   const { endpoint, key, databaseId, containerId } = config;
   const client = new CosmosClient({ endpoint, key });
   const database = client.database(databaseId);
   const container = database.container(containerId);
   await dbContext.create(client, databaseId, containerId);
 
-  var i = 0,j = 0;
+  var i = 0,j = 0,k = 0;
 
   try {
     const querySpec = {
@@ -126,11 +126,22 @@ exports.ADDe = async function(Res){
 
     const { resources: itemDefList } = await container.items.query(querySpec).fetchAll();
     for (const itemDef of itemDefList) {i++;}
-    for(j = 0;j < i;j++){if(Number(Res[3]) == itemDefList[j].id)break;}
 
-    await container.item(itemDefList[j].id, undefined).delete();
+    if(Adj === null){
+      for(j = 0;j < i;j++){if(Number(Res[3]) == itemDefList[j].id)break;}
+      await container.item(itemDefList[j].id, undefined).delete();
+      console.log(cyan + "Deleted item with id:" + yellow + itemDefList[j].id + reset);
+    }
+    else if(Adj === "ALL"){
+      for(j = 0;j < i;j++){if(Number(Res[3]) == itemDefList[j].id)break;}
+      for(k = j;k < (j + Number(Res[5]) - Number(Res[3]) + 1);k++){
+        await container.item(itemDefList[k].id, undefined).delete();
+        await console.log(cyan + "Deleted item with id:" + yellow + itemDefList[k].id + reset);
+      }
+    }
 
-    console.log(cyan + "Deleted item with id:" + yellow + itemDefList[j].id + reset);
+
+
 
   } catch (err) {await console.log(red + err.message + "@datadelete\n" + reset);return err;}
   await console.log(magenta + 'ADDe finish\n' + reset);

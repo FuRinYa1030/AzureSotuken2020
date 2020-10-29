@@ -46,10 +46,20 @@ exports.Analysis = async function(Res){
 
     JsonData2 = await JSON.parse(string);
 
-    JsonData3 = {
-      "dog": JsonData2.predictions[0].probability,
-      "cat": JsonData2.predictions[1].probability
+    if(JsonData2.predictions[0].tagName === 'cat'){
+      JsonData3 = {
+        "dog": JsonData2.predictions[1].probability,
+        "cat": JsonData2.predictions[0].probability
+      }
     }
+    else if(JsonData2.predictions[0].tagName === 'dog'){
+      JsonData3 = {
+        "dog": JsonData2.predictions[0].probability,
+        "cat": JsonData2.predictions[1].probability
+      }
+    }
+
+
 
     await console.log(JsonData3);
 

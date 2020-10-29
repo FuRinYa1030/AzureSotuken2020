@@ -107,7 +107,13 @@ const server = http.createServer(async(request, response) => {
 
                 else if(Res[1] === 'Delete'){
                   await console.log(magenta + 'post-ADDe\n' + reset);
-                  await CMDB.ADDe(Res);
+                  await CMDB.ADDe(Res,null);
+                  await response.end();
+                }
+
+                else if(Res[1] === 'Delete-ALL'){
+                  await console.log(magenta + 'post-ADDe\n' + reset);
+                  await CMDB.ADDe(Res,"ALL");
                   await response.end();
                 }
 
