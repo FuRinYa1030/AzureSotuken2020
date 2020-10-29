@@ -58,6 +58,11 @@
             "pathname": "/cosmosdbHTMLControl3.js",
             "target": "JavaScript/cosmosdbHTMLControl3.js",
             "content": "text/javascript"
+        },
+        {
+            "pathname": "/CustomVision.js",
+            "target": "JavaScript/CustomVision.js",
+            "content": "text/javascript"
         }
     ],
     "LIB": [

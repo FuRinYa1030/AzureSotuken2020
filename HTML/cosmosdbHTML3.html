@@ -13,15 +13,14 @@
   <body>
     <p>
       <h1>Hello world</h1>
-      <h2>This is Access DynamoDB (Data Download) Page</h2>
+      <h2>This is Access DynamoDB (Data Delete) Page</h2>
     </p>
 
     <div class = "b">
       <p>
-        <h2>　　　　　苗字：<input type="text" placeholder="firstname"   value="" id="firstname"   readonly></h2>
-        <h2>　　　　　名前：<input type="text" placeholder="lastname"    value="" id="lastname"    readonly></h2>
-        <h2>メールアドレス：<input type="text" placeholder="mailaddress" value="" id="mailaddress" readonly></h2>
-        <h2>　　パスワード：<input type="text" placeholder="passward"    value="" id="passward"    readonly></h2>
+        <h2>　　　　番号：<input type="text" placeholder="id"   value="" id="id"   readonly></h2>
+        <h2>犬である確率：<input type="text" placeholder="dog"   value="" id="dog"   readonly></h2>
+        <h2>猫である確率：<input type="text" placeholder="cat"    value="" id="cat"    readonly></h2>
       </p>
     </div>
 
@@ -30,6 +29,15 @@
       <a onclick="del()" class="btn-square-pop">Delete</a>
       <a>id:</a>
       <select name = "ID" id="sampleSelect" onchange="selectboxChange()"></select>
+      <script type = "text/javascript" src = "/cosmosdbHTMLControl3.js"></script>
+    </p>
+
+    <p>
+      <a onclick="del()" class="btn-square-pop">All-Delete</a>
+      <a>id:</a>
+      <select name = "ID" id="sampleSelect2" onchange="selectboxChange()"></select>
+      <a>~</a>
+      <select name = "ID" id="sampleSelect3" onchange="selectboxChange()"></select>
       <script type = "text/javascript" src = "/cosmosdbHTMLControl3.js"></script>
     </p>
 

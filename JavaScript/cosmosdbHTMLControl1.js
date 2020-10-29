@@ -47,18 +47,15 @@ async function ret(){
     }
 
     select.selectedIndex = 0;
-
-    document.getElementById("firstname").value = decodeURI(JsonData[select.value].firstname);
-    document.getElementById("lastname").value = decodeURI(JsonData[select.value].lastname);
-    document.getElementById("mailaddress").value = decodeURI(JsonData[select.value].mailaddress);
-    document.getElementById("passward").value = decodeURI(JsonData[select.value].passward);
+    document.getElementById("id").value = decodeURI(JsonData[select.value].id);
+    document.getElementById("dog").value = decodeURI(JsonData[select.value].dog);
+    document.getElementById("cat").value = decodeURI(JsonData[select.value].cat);
 
   }catch (err) {await alert(err.message + "@cosmosdbHTMLControl@select");}
 }
 
 function selectboxChange(){
-  document.getElementById("firstname").value = decodeURI(JsonData[select.value].firstname);
-  document.getElementById("lastname").value = decodeURI(JsonData[select.value].lastname);
-  document.getElementById("mailaddress").value = decodeURI(JsonData[select.value].mailaddress);
-  document.getElementById("passward").value = decodeURI(JsonData[select.value].passward);
+  document.getElementById("id").value = decodeURI(JsonData[select.value].id);
+  document.getElementById("dog").value = decodeURI(JsonData[select.value].dog);
+  document.getElementById("cat").value = decodeURI(JsonData[select.value].cat);
 }

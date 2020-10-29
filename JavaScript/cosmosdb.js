@@ -88,10 +88,8 @@ exports.ADU = async function(Res){
   JsonData = {
     id: idSt,
     id_s: Number(idSt),
-    firstname: Res[3],
-    lastname: Res[5],
-    mailaddress: Res[7],
-    passward: Res[9],
+    dog:Res.dog,
+    cat:Res.cat,
     isComplete: false
   }
 

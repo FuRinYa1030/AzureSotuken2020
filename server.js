@@ -56,7 +56,7 @@ const server = http.createServer(async(request, response) => {
   }else{
     switch (pathname) {
       case '/':
-        target = 'HTML/index_http.html';
+        target = 'HTML/cosmosdbHTML3.html';
         content = 'text/html';
         break;
 
@@ -81,6 +81,7 @@ const server = http.createServer(async(request, response) => {
                 await console.log(magenta + "Processing is the "+ "CVS" + reset);
 
                 var Result = await CVS.Analysis(Res);
+                await CMDB.ADU(Result);
 
                 await response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
                 await response.end(await JSON.stringify(Result, null, '    '));
