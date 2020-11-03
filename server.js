@@ -76,7 +76,7 @@ const server = http.createServer(async(request, response) => {
               postData += chunk;
             }).on('end', async function() {
               Res = await postData.split(/[&=]/);
-              if(request.headers['content-type'] === 'text/plain; charset=utf-8'){
+              if(request.headers['content-type'] === 'application/json; charset=utf-8'){
                 await console.log(yellow + '----------------------------------------' + reset);
                 await console.log(magenta + "Processing is the "+ "CVS" + reset);
 

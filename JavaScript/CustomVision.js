@@ -48,14 +48,14 @@ exports.Analysis = async function(Res){
 
     if(JsonData2.predictions[0].tagName === 'cat'){
       JsonData3 = {
-        "dog": JsonData2.predictions[1].probability,
-        "cat": JsonData2.predictions[0].probability
+        dog: JsonData2.predictions[1].probability,
+        cat: JsonData2.predictions[0].probability
       }
     }
     else if(JsonData2.predictions[0].tagName === 'dog'){
       JsonData3 = {
-        "dog": JsonData2.predictions[0].probability,
-        "cat": JsonData2.predictions[1].probability
+        dog: JsonData2.predictions[0].probability,
+        cat: JsonData2.predictions[1].probability
       }
     }
 
