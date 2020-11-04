@@ -7,6 +7,9 @@ var CMDB = require('./JavaScript/cosmosdb.js');
 var CVS = require('./JavaScript/CustomVision.js');
 
 var Res;
+var Result = {};
+var end1,end2,end3
+const NS_PER_SEC = 1e9;
 
 var black   = '\u001b[30m';
 var red     = '\u001b[31m';
@@ -33,6 +36,9 @@ const server = http.createServer(async(request, response) => {
   var pathname = await urlInfo.pathname;
   var pathname_toggle = pathname.split('.');
   var StaticFile_toggle = false;
+
+
+  var start1 = await process.hrtime();
 
 
   if(pathname_toggle[1] === 'html' | pathname_toggle[1] === 'css' | pathname_toggle[1] === 'js' | pathname_toggle[1] === 'lib'){
@@ -80,8 +86,20 @@ const server = http.createServer(async(request, response) => {
                 await console.log(yellow + '----------------------------------------' + reset);
                 await console.log(magenta + "Processing is the "+ "CVS" + reset);
 
-                var Result = await CVS.Analysis(Res);
+                var start2 = await process.hrtime();
+                Result = await CVS.Analysis(Res);
+                end2 = await process.hrtime(start2);
+
+                var start3 = await process.hrtime();
                 await CMDB.ADU(Result);
+                end3 = await process.hrtime(start3);
+                end1 = await process.hrtime(start1);
+
+
+                Result.total = await fn(end1);
+                Result.cvs = await fn(end2);
+                Result.db = await fn(end3);
+
 
                 await response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
                 await response.end(await JSON.stringify(Result, null, '    '));
@@ -151,6 +169,13 @@ const server = http.createServer(async(request, response) => {
     await response.end();
   }
 });
+
+
+
+async function fn(end){
+  return end[0] * NS_PER_SEC + end[1];
+}
+
 
 
 async function Error(response, plase){
