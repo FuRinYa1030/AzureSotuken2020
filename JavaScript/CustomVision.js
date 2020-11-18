@@ -2,7 +2,8 @@ var fs = require('fs');
 var request = require('sync-request');
 
 const predictionKey = "6f41c1b5f9c440d7a7b941b4fb796295";
-const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/2ea4f996-9dcf-4389-a714-48190b06d08f/classify/iterations/Iteration2/image";
+//const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/2ea4f996-9dcf-4389-a714-48190b06d08f/classify/iterations/Iteration2/image";
+const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/11228012-2f0b-470f-8698-3d497cee9803/classify/iterations/Iteration3/image";
 
 
 var black   = '';
