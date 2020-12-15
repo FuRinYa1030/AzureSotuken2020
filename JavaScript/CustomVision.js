@@ -3,7 +3,7 @@ var request = require('sync-request');
 
 const predictionKey = "6f41c1b5f9c440d7a7b941b4fb796295";
 
-const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/ff488853-a993-4cbf-bb6a-b8dbfc29f70d/classify/iterations/Iteration9/image";
+const endPoint = "https://cvs-1-5000.cognitiveservices.azure.com/customvision/v3.0/Prediction/73dfa1db-c7f9-4d6a-97ec-1e04111420c1/classify/iterations/Iteration10/image";
 
 
 var black   = '';
