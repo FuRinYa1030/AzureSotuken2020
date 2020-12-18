@@ -84,7 +84,7 @@ const server = http.createServer(async(request, response) => {
               Res = await postData.split(/[&=]/);
               if(request.headers['content-type'] === 'application/json; charset=utf-8'){
                 await console.log(yellow + '----------------------------------------' + reset);
-                await console.log(magenta + "Processing is the "+ "CVS" + reset);
+                await console.log(magenta + "Processing is the "+ "CVS\n" + reset);
 
                 var start2 = await process.hrtime();
                 Result = await CVS.Analysis(Res);
