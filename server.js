@@ -18,7 +18,7 @@ var yellow  = '';
 var blue    = '';
 var magenta = '';
 var cyan    = '';
-var white   = '';
+//var white   = '';
 var reset   = '';
 
 var toString = Object.prototype.toString;
